@@ -1,0 +1,2 @@
+stack:0x7fffffffbbf8
+offset:1456
