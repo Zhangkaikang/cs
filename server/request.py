@@ -81,7 +81,7 @@ if __name__=="__main__":
 
     # 设置ip
     host = '139.196.163.218'
-
+    host2 = '172.19.164.174'
     # 设置端口号
     port = 8100
 
@@ -120,12 +120,12 @@ if __name__=="__main__":
             clientsocket.close()
         #此时没有明确的表单参数，将其视为对html表单的初始请求
         elif request_header=='/':
-            http_response=buildMessage(buildform(host,port,labid,"","","")).encode("utf-8") #str转换为bytes
+            http_response=buildMessage(buildform(host2,port,labid,"","","")).encode("utf-8") #str转换为bytes
             clientsocket.send(http_response)
             clientsocket.close()
         #用户点击重置时返回新的表单
         elif 'reset=' in request_header:
-            http_response=buildMessage(buildform(host,port,labid,"","","")).encode("utf-8")
+            http_response=buildMessage(buildform(host2,port,labid,"","","")).encode("utf-8")
             clientsocket.send(http_response)
             clientsocket.close()
         else:
@@ -177,7 +177,7 @@ if __name__=="__main__":
             if username != "":
                 if not re.match(r'^[1-9]([0-9]{12})', username):
                     http_response = buildMessage(
-                        buildform(host, port, labid, username, usermail, username_taint_msg)).encode("utf-8")
+                        buildform(host2, port, labid, username, usermail, username_taint_msg)).encode("utf-8")
                     clientsocket.send(http_response)
                     clientsocket.close()
                     continue
@@ -185,21 +185,21 @@ if __name__=="__main__":
             #规范usermail
             if usermail != "":
                 if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.[com,cn,net]{1,3}$',usermail):
-                    http_response = buildMessage(buildform(host, port, labid, username, usermail,usermail_taint_msg)).encode("utf-8")
+                    http_response = buildMessage(buildform(host2, port, labid, username, usermail,usermail_taint_msg)).encode("utf-8")
                     clientsocket.send(http_response)
                     clientsocket.close()
                     continue
 
             #判断username输入是否为空
             if not username or username =="":
-                http_response = buildMessage(buildform(host, port, labid, username, usermail, null_username_msg)).encode("utf-8")
+                http_response = buildMessage(buildform(host2, port, labid, username, usermail, null_username_msg)).encode("utf-8")
                 clientsocket.send(http_response)
                 clientsocket.close()
                 continue
 
             # 判断usermail输入是否为空
             if not usermail or usermail == "":
-                http_response = buildMessage(buildform(host, port, labid, username, usermail, null_usermail_msg)).encode("utf-8")
+                http_response = buildMessage(buildform(host2, port, labid, username, usermail, null_usermail_msg)).encode("utf-8")
                 clientsocket.send(http_response)
                 clientsocket.close()
                 continue
